@@ -23,10 +23,12 @@ import javax.xml.bind.Unmarshaller;
 
 import ch.makery.address.model.Person;
 import ch.makery.address.model.PersonListWrapper;
+import ch.makery.address.model.Session;
 import ch.makery.address.view.BirthdayStatisticsController;
 import ch.makery.address.view.PersonEditDialogController;
 import ch.makery.address.view.PersonOverviewController;
 import ch.makery.address.view.RootLayoutController;
+import ch.makery.address.view.sessionInfoController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -39,7 +41,10 @@ import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
-    private Stage primaryStage;
+    //CONSTANTS
+	private static final String SESSIONINFO = "Session Info";
+	
+	private Stage primaryStage;
     private BorderPane rootLayout;
    // private SQLiteSync db;
     
@@ -70,8 +75,9 @@ public class MainApp extends Application {
         this.primaryStage.setTitle("Music to Movement");
         this.primaryStage.getIcons().add(new Image("file:Resources/Images/light_logo.png"));
         initRootLayout();
-
+        
         showPersonOverview();
+       showSessionInfo(); 
     }
 
     /**
@@ -130,6 +136,38 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
+    
+    /**
+     * Creates a new session info window.
+     * @param session: the session for which info is required. 
+     * @param title: title of the window
+     */
+    public void showSessionInfo() {//Session session, String title) {
+    	try {
+    		// Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/SessionInfo.fxml"));
+            AnchorPane sessionInfo = (AnchorPane) loader.load();
+    		String title = "29th May 2017";
+            //Create the new window stage
+            Stage sessionInfoStage = new Stage();
+            sessionInfoStage.setTitle(SESSIONINFO + " (" + title + ")");
+            sessionInfoStage.initModality(Modality.NONE);
+            sessionInfoStage.initOwner(primaryStage);
+            Scene scene = new Scene(sessionInfo);
+            sessionInfoStage.setScene(scene);
+            
+         // Give the controller access to the main app.
+            sessionInfoController controller = loader.getController();
+            controller.setMainApp(this);
+            sessionInfoStage.show(); 
+            
+    	} catch (Exception e){
+    		e.printStackTrace();
+    	}
+    }
+    
+    
     
     /**
      * Opens a dialog to edit details for the specified person. If the user

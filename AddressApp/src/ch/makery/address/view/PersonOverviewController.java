@@ -3,15 +3,19 @@ package ch.makery.address.view;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormatSymbols;
@@ -52,6 +56,11 @@ public class PersonOverviewController {
 
     @FXML
     private CategoryAxis xAxis;
+    
+    @FXML
+    private TabPane tabPane; 
+    
+    private int numTabs = 0; 
 
     private ObservableList<String> monthNames = FXCollections.observableArrayList();
 
@@ -121,7 +130,7 @@ public class PersonOverviewController {
         
         barChart.setLegendVisible(false);
         personTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> showPersonDetails(newValue));
+                (observable, oldValue, newValue) -> mainApp.showSessionInfo()); //handleNewTab()); //  //showPersonDetails(newValue));
                 
     }
 
@@ -253,4 +262,26 @@ public class PersonOverviewController {
             alert.showAndWait();
         }
     }
+    
+    /**
+	 * new tab trial
+	 * @throws IOException 
+	 */
+	public void handleNewTab(){
+	
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("SessionsForPerson.fxml"));
+        Tab tab = new Tab("Sessions for " + "Charu");
+        try {
+			tab.setContent(loader.load());
+		} catch (IOException e) {
+		
+			e.printStackTrace();
+		}
+        
+		tabPane.getTabs().add(tab);
+		numTabs++; 
+		tabPane.getSelectionModel().select(numTabs);
+		
+	}
 }
