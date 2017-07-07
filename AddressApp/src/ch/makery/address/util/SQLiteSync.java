@@ -32,7 +32,7 @@ public class SQLiteSync {
 
 		return res;
 	}
-
+//TODO make an all sessions button that uses this query? 
 	public ResultSet displaySessions() throws ClassNotFoundException, SQLException {
 		if (con == null) {
 			getConnection();
@@ -56,8 +56,6 @@ public class SQLiteSync {
 
 	public ObservableList<Session> displaySessionsForPatient(Patient patient, ObservableList<Session> data) {
 
-		
-	
 		PreparedStatement ps = null;
 		ResultSet res = null;
 
@@ -72,9 +70,11 @@ public class SQLiteSync {
 			String patientID = patient.getID(); 
 			ps.setString(1, patientID);
 			res = ps.executeQuery();
+			
 			while (res.next()){
 				data.add(new Session(res.getString("sessionID"), res.getString("sessionDate"), res.getString("patientID"))); 
 			}
+			
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -100,6 +100,58 @@ public class SQLiteSync {
 		return data;
 	}
 
+	/**
+	 * Fetches all session info such as best , mean tap etc
+	 * @param session
+	 * @return
+	 */
+	public Session getSessionInfo(Session session) {
+		
+		
+		PreparedStatement ps = null;
+		ResultSet res = null;
+
+		try {
+			
+			if (con == null) {
+				getConnection();
+			}
+			
+			String sql = "SELECT bestTap FROM " + SESSION_DATA_TBL + " WHERE sessionID = ? ";
+			ps = con.prepareStatement(sql);
+			String sessionID = session.getID(); 
+			ps.setString(1, sessionID);
+			res = ps.executeQuery();
+			
+			while (res.next()){
+				session.setSessionInfo((res.getString("bestTap")));
+			}
+			
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			
+		} finally {
+
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (res != null) {
+				try {
+					res.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return session; 
+		
+	}
 	private void getConnection() throws ClassNotFoundException, SQLException {
 
 		Class.forName("org.sqlite.JDBC"); // find the sqlite JDBC driver

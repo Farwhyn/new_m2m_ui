@@ -27,27 +27,46 @@ import java.util.Locale;
 import ch.makery.address.MainApp;
 import ch.makery.address.model.Patient;
 import ch.makery.address.model.Person;
+import ch.makery.address.model.Session;
 import ch.makery.address.util.DateUtil;
 import ch.makery.address.util.SQLiteSync;
 
 public class sessionInfoController {
 	@FXML
-	private Label bestLabel;
+	private Label bestLabelTap;
+	@FXML
+	private Label bestLabelSpin;
+	@FXML
+	private Label bestLabelSqueeze;
 	
 	@FXML
-	private Label meanLabel;
+	private Label meanLabelTap;
+	@FXML
+	private Label meanLabelSpin;
+	@FXML
+	private Label meanLabelSqueeze;
 	
 	@FXML
-	private Label medianLabel;
+	private Label medianLabelTap;
+	@FXML
+	private Label medianLabelSpin;
+	@FXML
+	private Label medianLabelSqueeze;
 	
 	@FXML
-	private Label stdDeviationLabel ;
+	private Label stdDeviationLabelTap;
+	@FXML
+	private Label stdDeviationLabelSpin;
+	@FXML
+	private Label stdDeviationLabelSqueeze;
+	
 	
 	@FXML 
 	private TabPane tabPane;
 	
+	
     // Reference to the main application.
-    private MainApp mainApp;
+    private Session session;
     private SQLiteSync db;
     
     /**
@@ -56,7 +75,7 @@ public class sessionInfoController {
      */
     
     public sessionInfoController(){
-    	//stdDeviationLabel.setText("45");
+    	
     }
     
     
@@ -74,30 +93,22 @@ public class sessionInfoController {
 	 * back to itself
 	 * @param mainApp
 	 */
-	public void setMainApp(MainApp mainApp){
-		this.mainApp = mainApp;
-		
-	}
+	public void setSession(Session session){
+		this.session = session;
+		this.db = new SQLiteSync(); 
+		setSessionInfo(); 
+    }
+    
+    
+    /**
+     * Clears the sessions table and regenerates session 
+     * information from the database
+     */
+    public void setSessionInfo() {
+    	
+    	db.getSessionInfo(session);
+    	bestLabelTap.setText(session.getBestTap());
+      
+    }
 	
-	/**
-	 * new tab trial
-	 * @throws IOException 
-	 */
-	public void newTab(){
-	
-		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("PersonSessionsTab.fxml"));
-        Tab tab = new Tab("Some title");
-        try {
-			tab.setContent(loader.load());
-		} catch (IOException e) {
-		
-			e.printStackTrace();
-		}
-        
-		tabPane.getTabs().add(tab);
-		tabPane.getSelectionModel().select(2);
-		tab.setClosable(true);
-		
-	}
 }

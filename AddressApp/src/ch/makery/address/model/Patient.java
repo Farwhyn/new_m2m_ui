@@ -30,7 +30,7 @@ public class Patient{
      * The sessions as an observable list of Sessions
      */
     private ObservableList<Session> sessionData = FXCollections.observableArrayList();
-    
+    //TODO refator to sessionsData
     /**
      * Default constructor.
      */

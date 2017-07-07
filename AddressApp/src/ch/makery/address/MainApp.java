@@ -80,7 +80,7 @@ public class MainApp extends Application {
         initRootLayout();
         
        showPersonOverview();
-       
+    //   showSessionInfo();
     }
 
     /**
@@ -144,9 +144,10 @@ public class MainApp extends Application {
      * Creates a new session info window.
      * @param session: the session for which info is required. 
      * @param title: title of the window
-     * TODO move this to sessions for persons? 
+     * TODO remove from here?
+     *  
      */
-    public void showSessionInfo() {//Session session, String title) {
+  /*  public void showSessionInfo() {//Session session, String title) {
     	try {
     		// Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -169,7 +170,7 @@ public class MainApp extends Application {
     	} catch (Exception e){
     		e.printStackTrace();
     	}
-    }
+    }*/
     
     
     

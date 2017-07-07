@@ -10,11 +10,19 @@ import ch.makery.address.model.Session;
 import ch.makery.address.util.SQLiteSync;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class SessionsForPersonController {
 
+    //CONSTANTS
+	private static final String SESSIONINFO = "Session Info";
+	
     @FXML
     private TableView<Session> sessionsTable;
     @FXML
@@ -43,6 +51,12 @@ public class SessionsForPersonController {
     	//Initialize the Sessions Column
     	sessionIDColumn.setCellValueFactory(cellData -> cellData.getValue().sessionIDProperty());
         sessionDateColumn.setCellValueFactory(cellData -> cellData.getValue().sessionDateProperty());
+   
+        sessionsTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+
+			showSessionInfo(newValue);
+
+		});
     }
 
  
@@ -50,31 +64,16 @@ public class SessionsForPersonController {
     
     /**
      * Gives a reference back to the patient
+     * Also initializes a database instance and sets up table data
      * @param patient: the patient who's sessions need to be shown
      */
     public void setPatient(Patient patient) {
     	this.patient = patient; 
     	this.db = new SQLiteSync();
-    	
-    //	TODO
     	setSessionData(patient.getSessionData()); 
     	sessionsTable.setItems(patient.getSessionData()); 
     }
     
-    /**
-     * Gives a reference back to the Main App. 
-     * Also initializes a database instance
-     * @param mainApp - the mainApp
-     */
- /*   public void setMainApp(MainApp mainApp){
-    	this.mainApp = mainApp; 
-    	//this.db = new SQLiteSync();
-    	
-    //	TODO
-    //	setSessionData(mainApp.getSessionData()); 
-    	sessionsTable.setItems(mainApp.getSessionData()); 
-    	
-    }*/
     
     /**
      * Clears the sessions table and regenerates session 
@@ -83,18 +82,8 @@ public class SessionsForPersonController {
     public void setSessionData(ObservableList<Session> data) {
     	
     	data.clear();
-     //   ResultSet rs = null;  
-            
-        //try {
-           // rs = db.displaySessionsForPatient(patient);  
-          data =  db.displaySessionsForPatient(patient, data); 
-            //while(rs.next()) {
-            //    data.add(new Session(rs.getString("sessionID"), rs.getString("sessionDate"), rs.getString("patientID"))); 
-          //  }
-       // } catch (SQLException e) {
-         //   e.printStackTrace();
-        //}
-       
+        data =  db.displaySessionsForPatient(patient, data); 
+      
     }
     
     
@@ -114,5 +103,39 @@ public class SessionsForPersonController {
         }
     }
 
+    /**
+     * Creates a new session info window.
+     * @param session: the session for which info is required. 
+     * @param title: title of the window
+     * TODO cleanup references?  
+     */
+    public void showSessionInfo(Session session) {
+    	try {
+    		
+    		// Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/SessionInfo.fxml"));
+            AnchorPane sessionInfo = (AnchorPane) loader.load();
+    		String title = session.getSessionDateAsString();
+          
+    		//Create the new window stage
+            Stage sessionInfoStage = new Stage();
+            sessionInfoStage.setTitle(SESSIONINFO + " (" + title + ")");
+            sessionInfoStage.initModality(Modality.NONE);
+       
+            //TODO do we really need this? sessionInfoStage.initOwner();
+            
+            Scene scene = new Scene(sessionInfo);
+            sessionInfoStage.setScene(scene);
+            
+            //Give the controller access to the main app.
+            sessionInfoController controller = loader.getController();
+            controller.setSession(session);
+            sessionInfoStage.show(); 
+            
+    	} catch (Exception e){
+    		e.printStackTrace();
+    	}
+    }
 	
 }
