@@ -54,7 +54,7 @@ public class SQLiteSync {
 	 * @throws SQLException
 	 */
 
-	public ResultSet displaySessionsForPatient(Patient patient, ObservableList<Session> data) {
+	public ObservableList<Session> displaySessionsForPatient(Patient patient, ObservableList<Session> data) {
 
 		
 	
@@ -88,9 +88,16 @@ public class SQLiteSync {
 					e.printStackTrace();
 				}
 			}
+			if (res != null) {
+				try {
+					res.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 
-		return res;
+		return data;
 	}
 
 	private void getConnection() throws ClassNotFoundException, SQLException {

@@ -53,10 +53,6 @@ public class MainApp extends Application {
     */
    private ObservableList<Patient> personData = FXCollections.observableArrayList();
   
-   /*
-    * The sessions as an observable list of Sessions
-    */
-   private ObservableList<Session> sessionData = FXCollections.observableArrayList();
 
    /**
     * Constructor
@@ -75,12 +71,7 @@ public class MainApp extends Application {
        return personData;
    }
 
-   /**
-    * Returns the session data as an observable list of Sessions
-    */
-   public ObservableList<Session> getSessionData() {
-	   return sessionData; 
-   }
+ 
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;

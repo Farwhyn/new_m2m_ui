@@ -54,6 +54,11 @@ public class SessionsForPersonController {
      */
     public void setPatient(Patient patient) {
     	this.patient = patient; 
+    	this.db = new SQLiteSync();
+    	
+    //	TODO
+    	setSessionData(patient.getSessionData()); 
+    	sessionsTable.setItems(patient.getSessionData()); 
     }
     
     /**
@@ -61,14 +66,15 @@ public class SessionsForPersonController {
      * Also initializes a database instance
      * @param mainApp - the mainApp
      */
-    public void setMainApp(MainApp mainApp){
+ /*   public void setMainApp(MainApp mainApp){
     	this.mainApp = mainApp; 
-    	this.db = new SQLiteSync();
+    	//this.db = new SQLiteSync();
+    	
     //	TODO
-    	setSessionData(mainApp.getSessionData()); 
+    //	setSessionData(mainApp.getSessionData()); 
     	sessionsTable.setItems(mainApp.getSessionData()); 
     	
-    }
+    }*/
     
     /**
      * Clears the sessions table and regenerates session 
@@ -77,17 +83,17 @@ public class SessionsForPersonController {
     public void setSessionData(ObservableList<Session> data) {
     	
     	data.clear();
-        ResultSet rs = null;  
+     //   ResultSet rs = null;  
             
-       // try {
+        //try {
            // rs = db.displaySessionsForPatient(patient);  
-            db.displaySessionsForPatient(patient, data); 
-         //   while(rs.next()) {
-               // data.add(new Session(rs.getString("sessionID"), rs.getString("sessionDate"), rs.getString("patientID"))); 
+          data =  db.displaySessionsForPatient(patient, data); 
+            //while(rs.next()) {
+            //    data.add(new Session(rs.getString("sessionID"), rs.getString("sessionDate"), rs.getString("patientID"))); 
           //  }
-   //     } catch (SQLException e) {
-       //     e.printStackTrace();
-      //  }
+       // } catch (SQLException e) {
+         //   e.printStackTrace();
+        //}
        
     }
     

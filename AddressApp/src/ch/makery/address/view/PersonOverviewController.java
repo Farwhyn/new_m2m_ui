@@ -289,8 +289,8 @@ public class PersonOverviewController {
 				SessionsForPersonController controller = loader.getController();
 				controller.setPatient(patient); // Give the controller access to
 												// the patient
-				controller.setMainApp(mainApp);
-
+				//controller.setMainApp(mainApp);
+				controller.setPatient(patient);
 			} catch (IOException e) {
 
 				e.printStackTrace();
