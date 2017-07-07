@@ -117,14 +117,18 @@ public class SQLiteSync {
 				getConnection();
 			}
 			
-			String sql = "SELECT bestTap FROM " + SESSION_DATA_TBL + " WHERE sessionID = ? ";
+			String sql = "SELECT bestTap, meanTap, medianTap, stdDeviationTap, " + " bestSpin,  meanSpin,  medianSpin, stdDeviationSpin, " + 
+			" bestSqueeze, meanSqueeze,  medianSqueeze, stdDeviationSqueeze FROM " + SESSION_DATA_TBL + " WHERE sessionID = ? ";
+			
 			ps = con.prepareStatement(sql);
 			String sessionID = session.getID(); 
 			ps.setString(1, sessionID);
 			res = ps.executeQuery();
 			
 			while (res.next()){
-				session.setSessionInfo((res.getString("bestTap")));
+				session.setSessionInfo((res.getString("bestTap")), (res.getString("meanTap")), (res.getString("medianTap")),(res.getString("stdDeviationTap")),
+						(res.getString("bestSpin")), (res.getString("meanSpin")), (res.getString("medianSpin")),(res.getString("stdDeviationSpin")),
+						(res.getString("bestSqueeze")), (res.getString("meanSqueeze")), (res.getString("medianSqueeze")),(res.getString("stdDeviationSqueeze")));
 			}
 			
 		} catch (Exception e) {

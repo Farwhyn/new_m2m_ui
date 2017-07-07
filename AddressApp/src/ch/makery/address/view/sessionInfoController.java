@@ -107,8 +107,22 @@ public class sessionInfoController {
     public void setSessionInfo() {
     	
     	db.getSessionInfo(session);
+    	
     	bestLabelTap.setText(session.getBestTap());
-      
+    	meanLabelTap.setText(session.getMeanTap());
+    	medianLabelTap.setText(session.getMedianTap());
+    	stdDeviationLabelTap.setText(session.getStdDeviationTap());
+    	
+    	bestLabelSpin.setText(session.getBestSpin());
+    	meanLabelSpin.setText(session.getMeanSpin());
+    	medianLabelSpin.setText(session.getMedianSpin());
+    	stdDeviationLabelSpin.setText(session.getStdDeviationSpin());
+    	
+    	bestLabelSqueeze.setText(session.getBestSqueeze());
+    	meanLabelSqueeze.setText(session.getMeanSqueeze());
+    	medianLabelSqueeze.setText(session.getMedianSqueeze());
+    	stdDeviationLabelSqueeze.setText(session.getStdDeviationSqueeze());
+   
     }
 	
 }

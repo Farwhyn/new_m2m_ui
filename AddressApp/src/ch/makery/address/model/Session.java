@@ -55,9 +55,29 @@ public class Session {
 	/**
 	 * Sets up session data for Session Info Page
 	 */
-	public void setSessionInfo(String bestTap) {
+	public void setSessionInfo(String bestTap, String meanTap, String medianTap, String stdDeviationTap,
+			String bestSpin, String meanSpin, String medianSpin, String stdDeviationSpin,
+			String bestSqueeze, String meanSqueeze, String medianSqueeze, String stdDeviationSqueeze) {
+		//TODO handle null values - set default in db to 0.0, not null ? 
+		//set Tap info
 		this.bestTap = Double.parseDouble(bestTap);
+		this.meanTap = Double.parseDouble(meanTap);	
+		this.medianTap = Double.parseDouble(medianTap);	
+		this.stdDeviationTap = Double.parseDouble(stdDeviationTap);
+		
+		//set Spin info
+		this.bestSpin = Double.parseDouble(bestSpin);
+		this.meanSpin = Double.parseDouble(meanSpin);	
+		this.medianSpin = Double.parseDouble(medianSpin);	
+		this.stdDeviationSpin = Double.parseDouble(stdDeviationSpin);
+		
+		//set Squeeze info
+		this.bestSqueeze = Double.parseDouble(bestSqueeze);
+		this.meanSqueeze = Double.parseDouble(meanSqueeze);	
+		this.medianSqueeze = Double.parseDouble(medianSqueeze);	
+		this.stdDeviationSqueeze = Double.parseDouble(stdDeviationSqueeze);
 	}
+	
 	
 	
 	/**
@@ -93,11 +113,59 @@ public class Session {
 		return this.sessionID.get(); 
 	}
 
-	/**
-	 * Returns best tap value
-	 * @return bestTap
-	 */
+
 	public String getBestTap() {
 		return Double.toString(this.bestTap);
 	}
+	
+	
+	public String getMeanTap() {
+		return Double.toString(this.meanTap);
+	}
+	
+	
+	public String getMedianTap() {
+		return Double.toString(this.medianTap);
+	}
+	
+	public String getStdDeviationTap() {
+		return Double.toString(this.stdDeviationTap);
+	}
+
+	public String getBestSpin() {
+		return Double.toString(this.bestSpin);
+	}
+	
+	
+	public String getMeanSpin() {
+		return Double.toString(this.meanSpin);
+	}
+	
+	
+	public String getMedianSpin() {
+		return Double.toString(this.medianSpin);
+	}
+	
+	public String getStdDeviationSpin() {
+		return Double.toString(this.stdDeviationSpin);
+	}
+	
+	public String getBestSqueeze() {
+		return Double.toString(this.bestSqueeze);
+	}
+	
+	
+	public String getMeanSqueeze() {
+		return Double.toString(this.meanSqueeze);
+	}
+	
+	
+	public String getMedianSqueeze() {
+		return Double.toString(this.medianSqueeze);
+	}
+	
+	public String getStdDeviationSqueeze() {
+		return Double.toString(this.stdDeviationSqueeze);
+	}
+	
 }

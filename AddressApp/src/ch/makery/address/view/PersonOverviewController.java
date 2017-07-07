@@ -282,7 +282,9 @@ public class PersonOverviewController {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("SessionsForPerson.fxml")); 
 																							
 			Tab tab = new Tab("Sessions for " + patient.getFirstName()); 
-
+			tab.setClosable(true);
+		
+			
 			try {
 
 				tab.setContent(loader.load());
@@ -297,9 +299,10 @@ public class PersonOverviewController {
 			}
 
 			tabPane.getTabs().add(tab);
-			numTabs++;
+			numTabs++; //TODO adjust numTabs when a tab is closed
 			tabPane.getSelectionModel().select(numTabs); // change view to the
 															// newly opened tab
+			
 
 		} else {
 			System.out.println("patient is null");
