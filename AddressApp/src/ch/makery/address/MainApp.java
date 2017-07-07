@@ -52,6 +52,11 @@ public class MainApp extends Application {
     * The data as an observable list of Persons.
     */
    private ObservableList<Patient> personData = FXCollections.observableArrayList();
+  
+   /*
+    * The sessions as an observable list of Sessions
+    */
+   private ObservableList<Session> sessionData = FXCollections.observableArrayList();
 
    /**
     * Constructor
@@ -65,10 +70,17 @@ public class MainApp extends Application {
     * Returns the data as an observable list of Persons. 
     * @return
     */
+   //TODO change person to patient
    public ObservableList<Patient> getPersonData() {
        return personData;
    }
 
+   /**
+    * Returns the session data as an observable list of Sessions
+    */
+   public ObservableList<Session> getSessionData() {
+	   return sessionData; 
+   }
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -76,8 +88,8 @@ public class MainApp extends Application {
         this.primaryStage.getIcons().add(new Image("file:Resources/Images/light_logo.png"));
         initRootLayout();
         
-        showPersonOverview();
-       showSessionInfo(); 
+       showPersonOverview();
+       
     }
 
     /**
@@ -141,6 +153,7 @@ public class MainApp extends Application {
      * Creates a new session info window.
      * @param session: the session for which info is required. 
      * @param title: title of the window
+     * TODO move this to sessions for persons? 
      */
     public void showSessionInfo() {//Session session, String title) {
     	try {

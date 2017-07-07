@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import ch.makery.address.model.Patient;
+import ch.makery.address.model.Session;
+import javafx.collections.ObservableList;
 
 public class SQLiteSync {
 
@@ -52,8 +54,9 @@ public class SQLiteSync {
 	 * @throws SQLException
 	 */
 
-	public ResultSet displaySessionsForPatient(Patient patient) {
+	public ResultSet displaySessionsForPatient(Patient patient, ObservableList<Session> data) {
 
+		
 	
 		PreparedStatement ps = null;
 		ResultSet res = null;
@@ -64,11 +67,14 @@ public class SQLiteSync {
 				getConnection();
 			}
 			
-			String sql = "SELECT sessionID, patientID, sessionDate FROM " + SESSIONS_TBL + "WHERE patientID = ? ORDER BY sessionDate ";
+			String sql = "SELECT sessionID, patientID, sessionDate FROM " + SESSIONS_TBL + " WHERE patientID = ? ORDER BY sessionDate ";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, patient.getID());
+			String patientID = patient.getID(); 
+			ps.setString(1, patientID);
 			res = ps.executeQuery();
-
+			while (res.next()){
+				data.add(new Session(res.getString("sessionID"), res.getString("sessionDate"), res.getString("patientID"))); 
+			}
 		} catch (Exception e) {
 
 			e.printStackTrace();
