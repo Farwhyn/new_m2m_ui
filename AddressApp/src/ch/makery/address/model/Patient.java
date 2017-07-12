@@ -8,6 +8,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /*
  * Class: Patient
@@ -24,6 +26,11 @@ public class Patient{
     private final StringProperty careCardNum;
     private final StringProperty visitDate;
     
+    /*
+     * The sessions as an observable list of Sessions
+     */
+    private ObservableList<Session> sessionData = FXCollections.observableArrayList();
+    //TODO refator to sessionsData
     /**
      * Default constructor.
      */
@@ -117,5 +124,12 @@ public class Patient{
     
     public StringProperty dateProperty() {
         return visitDate;
+    }
+    
+    /**
+     * Returns the session data as an observable list of Sessions
+     */
+    public ObservableList<Session> getSessionData() {
+ 	   return sessionData; 
     }
 }
