@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 
 import java.io.IOException;
@@ -130,12 +131,22 @@ public class PersonOverviewController {
 
 		barChart.setLegendVisible(false);
 
-		personTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+/*		personTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 
 			handleNewListSessionsTab(newValue);
 
 		});
-
+*/
+		personTable.setRowFactory( tv -> {
+			TableRow<Patient> row = new TableRow<>(); 
+			row.setOnMouseClicked(event -> {
+				if(event.getClickCount() == 2 && (!row.isEmpty())) {
+					Patient selectedPatient = row.getItem(); 
+					handleNewListSessionsTab(selectedPatient); 
+				}
+			});
+			return row; 
+		});
 		// showPersonDetails(newValue));
 		// handleNewListSessionsTab(null));
 		// mainApp.showSessionInfo());
@@ -293,6 +304,11 @@ public class PersonOverviewController {
 												// the patient
 				//controller.setMainApp(mainApp);
 				controller.setPatient(patient);
+			
+				tab.setOnClosed( e -> {
+					numTabs--; 
+					}
+				);
 			} catch (IOException e) {
 
 				e.printStackTrace();

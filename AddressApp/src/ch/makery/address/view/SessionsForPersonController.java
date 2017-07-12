@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -52,10 +53,21 @@ public class SessionsForPersonController {
     	sessionIDColumn.setCellValueFactory(cellData -> cellData.getValue().sessionIDProperty());
         sessionDateColumn.setCellValueFactory(cellData -> cellData.getValue().sessionDateProperty());
    
-        sessionsTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+     /*   sessionsTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 
 			showSessionInfo(newValue);
 
+		});*/
+        
+    	sessionsTable.setRowFactory( tv -> {
+			TableRow<Session> row = new TableRow<>(); 
+			row.setOnMouseClicked(event -> {
+				if(event.getClickCount() == 2 && (!row.isEmpty())) {
+					Session selectedSession = row.getItem(); 
+					showSessionInfo(selectedSession);  
+				}
+			});
+			return row; 
 		});
     }
 
