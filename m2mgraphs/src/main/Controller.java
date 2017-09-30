@@ -776,5 +776,10 @@ public class Controller {
 		}
 		
 	}
-	
+//Charu-S
+	public static void setThresholds(Double levelOne, Double levelTwo) {
+		// TODO Auto-generated method stub
+		
+	}
+//Charu-E
 }

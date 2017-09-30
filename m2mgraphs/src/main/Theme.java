@@ -19,7 +19,23 @@ public class Theme {
 	
 	// plot
 	public static float[] plotOutlineColor        = new float[] {0.0f, 0.0f, 0.0f, 1.0f};
-	public static float[] plotBackgroundColor     = new float[] {230.0f/255.0f, 230.0f/255.0f, 230.0f/255.0f, 1.0f};
+	public static float[] plotBackgroundColor     = new float[] {255.0f/255.0f, 255.0f/255.0f, 255.0f/255.0f, 1.0f};
+//Charu-S
+	//level colours
+	public static float[] plotBackgroundColorRed  = new float[] {230.0f/255.0f, 0.0f, 0.0f, 0.3f};
+	public static float[] plotBackgroundColorGreen = new float[] {0.0f, 230.0f/255.0f, 0.0f, 0.3f};
+	public static float[] plotBackgroundColorBlue  = new float[] {0.0f, 0.0f, 230.0f/255.0f, 0.3f};
+	public static float[] plotBackgroundColorPink  = new float[] {0.7f, 0.5f, 0.8f, 0.3f};
+	public static float[] plotBackgroundColorPurple  = new float[] {0.6f, 0.5f, 0.8f, 0.3f};
+	public static float[] plotBackgroundColorOther  = new float[] {0.8f, 0.5f, 0.8f, 0.3f};
+	
+	
+	public static float[] plotBackgroundColorLight  = new float[] {225.0f/255.0f, 255.0f/255.0f, 255.0f/255.0f, 0.3f};
+	public static float[] plotBackgroundColorMedium  = new float[] {190.0f/255.0f, 255.0f/255.0f, 255.0f/255.0f, 0.3f};
+	public static float[] plotBackgroundColorDark  = new float[] {130.0f/255.0f, 255.0f/255.0f, 255.0f/255.0f, 0.3f};
+	public static float[] plotBackgroundColorDarker  = new float[] {5.0f/255.0f, 255.0f/255.0f, 255.0f/255.0f, 0.3f};
+	
+//Charu-E	
 	public static float[] divisionLinesColor      = new float[] {180.0f/255.0f, 180.0f/255.0f, 180.0f/255.0f, 1.0f};
 	public static float[] divisionLinesFadedColor = new float[] {180.0f/255.0f, 180.0f/255.0f, 180.0f/255.0f, 0.0f};
 	

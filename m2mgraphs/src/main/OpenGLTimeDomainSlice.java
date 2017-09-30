@@ -97,7 +97,7 @@ public class OpenGLTimeDomainSlice {
 	int _firstIndex = 0;
 	int _lastIndex = 0;
 	
-	public void updateSliceTexture(int sliceNumber, int sliceWidth, int sliceHeight, int plotWidth, float domain, float plotMinY, float plotMaxY, int datasetsSize, Dataset[] datasets, Set<Integer> xDivisions, Set<Float> yDivisions, GL2 gl) {
+	public void updateSliceTexture(int sliceNumber, int sliceWidth, int sliceHeight, int plotWidth, float domain, float plotMinY, float plotMaxY, int datasetsSize, Dataset[] datasets, Set<Integer> xDivisions, Set<Float> yDivisions, GL2 gl, float levelOne, float levelTwo, float levelThree) {
 		
 		// determine which x values need to be plotted
 		int firstIndex = (int) Math.floor((double) (sliceNumber * sliceWidth)    * ((double) domain / (double) plotWidth));
@@ -196,14 +196,51 @@ public class OpenGLTimeDomainSlice {
 		gl.glLoadIdentity();
 		
 		// draw gray background
-		gl.glBegin(GL2.GL_QUADS);
+//Charu-S
+/*		gl.glBegin(GL2.GL_QUADS);
 		gl.glColor3fv(Theme.plotBackgroundColor, 0);
 			gl.glVertex2f(0,          0);
 			gl.glVertex2f(0,          sliceHeight);
 			gl.glVertex2f(sliceWidth, sliceHeight);
 			gl.glVertex2f(sliceWidth, 0);
+		gl.glEnd();*/
+		
+		
+	
+		gl.glBegin(GL2.GL_QUADS);
+		gl.glColor3fv(Theme.plotBackgroundColorLight, 0);
+		
+			gl.glVertex2f(0,          0);
+			gl.glVertex2f(0,          sliceHeight/4.0f);
+			gl.glVertex2f(sliceWidth, sliceHeight/4.0f);
+			gl.glVertex2f(sliceWidth, 0);
 		gl.glEnd();
 		
+		gl.glBegin(GL2.GL_QUADS);
+		gl.glColor3fv(Theme.plotBackgroundColorMedium, 0);
+			gl.glVertex2f(0,          sliceHeight/4.0f);
+			gl.glVertex2f(0,          2.0f*sliceHeight/4.0f);
+			gl.glVertex2f(sliceWidth, 2.0f*sliceHeight/4.0f);
+			gl.glVertex2f(sliceWidth, sliceHeight/4.0f);
+		gl.glEnd();
+		
+		gl.glBegin(GL2.GL_QUADS);
+		gl.glColor3fv(Theme.plotBackgroundColorDark, 0);
+			gl.glVertex2f(0,          2.0f*sliceHeight/4.0f);
+			gl.glVertex2f(0,          3.0f*sliceHeight/4.0f);
+			gl.glVertex2f(sliceWidth, 3.0f*sliceHeight/4.0f);
+			gl.glVertex2f(sliceWidth, 2.0f*sliceHeight/4.0f);
+		gl.glEnd();
+		
+		gl.glBegin(GL2.GL_QUADS);
+		gl.glColor3fv(Theme.plotBackgroundColorDarker, 0);
+			gl.glVertex2f(0,          3.0f*sliceHeight/4.0f);
+			gl.glVertex2f(0,          sliceHeight);
+			gl.glVertex2f(sliceWidth, sliceHeight);
+			gl.glVertex2f(sliceWidth, 3.0f*sliceHeight/4.0f);
+		gl.glEnd();
+		
+//Charu-E		
 		// draw the vertical division lines
 		if(_xDivisionsSize > 0) {
 			int firstXdiv = firstIndex - (firstIndex % _xDivisionsSize);

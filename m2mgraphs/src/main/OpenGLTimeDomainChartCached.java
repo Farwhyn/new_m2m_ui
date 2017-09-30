@@ -22,7 +22,11 @@ public class OpenGLTimeDomainChartCached extends PositionedChart {
 	boolean   autoscaleMax;
 	float     manualMin;
 	float     manualMax;
-	
+//Charu-S
+	float levelOne = 0.0f; 
+	float levelTwo = 0.0f; 
+	float levelThree = 0.0f;
+//Charu-E
 	public static ChartFactory getFactory() {
 		
 		return new ChartFactory() {
@@ -30,6 +34,7 @@ public class OpenGLTimeDomainChartCached extends PositionedChart {
 			WidgetDatasets datasetsWidget;
 			WidgetTextfieldInteger sampleCountWidget;
 			WidgetTextfieldsOptionalMinMax minMaxWidget;
+			WidgetThresholdsOptionalFloat thresholdsWidget; 
 			
 			@Override public String toString() { return "Time Domain Chart (Cached)"; }
 			
@@ -38,15 +43,18 @@ public class OpenGLTimeDomainChartCached extends PositionedChart {
 				datasetsWidget    = new WidgetDatasets();
 				sampleCountWidget = new WidgetTextfieldInteger("Sample Count", 1000, 5, Integer.MAX_VALUE);
 				minMaxWidget      = new WidgetTextfieldsOptionalMinMax("Y-Axis", -1.0f, 1.0f, -Float.MAX_VALUE, Float.MAX_VALUE);
-	
-				JPanel[] widgets = new JPanel[5];
+				thresholdsWidget  = new WidgetThresholdsOptionalFloat(0.2f, 0.4f, 0.6f, 0.0f, 0.8f); 
+				
+				JPanel[] widgets = new JPanel[7];
 				
 				widgets[0] = datasetsWidget;
 				widgets[1] = null;
 				widgets[2] = sampleCountWidget;
 				widgets[3] = null;
 				widgets[4] = minMaxWidget;
-
+				widgets[5] = null; 
+				widgets[6] = thresholdsWidget;
+				
 				return widgets;
 				
 			}
@@ -55,20 +63,27 @@ public class OpenGLTimeDomainChartCached extends PositionedChart {
 				return 5;
 			}
 			
-			@Override public PositionedChart createChart(int x1, int y1, int x2, int y2) {
-
+		@Override public PositionedChart createChart(int x1, int y1, int x2, int y2) {
 				int sampleCount      = sampleCountWidget.getValue();
 				Dataset[] datasets   = datasetsWidget.getDatasets();
-				boolean autoscaleMin = minMaxWidget.isMinimumAutomatic();
+			//	boolean autoscaleMin = minMaxWidget.isMinimumAutomatic();
 				float manualMin      = minMaxWidget.getMinimumValue();
-				boolean autoscaleMax = minMaxWidget.isMaximumAutomatic();
+			//	boolean autoscaleMax = minMaxWidget.isMaximumAutomatic();
 				float manualMax      = minMaxWidget.getMaximumValue();
-				
+				boolean autoscaleMin = false; 
+				boolean autoscaleMax = false;
 				if(datasets.length == 0)
 					return null;
 				
+				float levelOneThreshold = thresholdsWidget.getLevelOneValue(); 
+				float levelTwoThreshold = thresholdsWidget.getLevelTwoValue();
+				float levelThreeThreshold = thresholdsWidget.getLevelThreeValue(); 
+				
 				OpenGLTimeDomainChartCached chart = new OpenGLTimeDomainChartCached(x1, y1, x2, y2, sampleCount, datasets);
 				chart.setYaxisRange(autoscaleMin, manualMin, autoscaleMax, manualMax);
+				
+				chart.setThresholds(levelOneThreshold, levelTwoThreshold,levelThreeThreshold); 
+				
 				
 				return chart;
 				
@@ -242,13 +257,22 @@ public class OpenGLTimeDomainChartCached extends PositionedChart {
 		
 		// draw plot background
 		gl.glBegin(GL2.GL_QUADS);
-		gl.glColor4fv(Theme.plotBackgroundColor, 0);
+		gl.glColor4fv(Theme.plotBackgroundColorGreen, 0);
 			gl.glVertex2f(xPlotLeft,  yPlotTop);
 			gl.glVertex2f(xPlotRight, yPlotTop);
 			gl.glVertex2f(xPlotRight, yPlotBottom);
 			gl.glVertex2f(xPlotLeft,  yPlotBottom);
 		gl.glEnd();
 		
+		/*
+		gl.glBegin(GL2.GL_QUADS);
+		gl.glColor4fv(Theme.plotBackgroundColorRed, 0);
+			gl.glVertex2f(xPlotLeft,  yPlotTop);
+			gl.glVertex2f(xPlotRight, yPlotTop);
+			gl.glVertex2f(xPlotRight, yPlotTop/2.0f);
+			gl.glVertex2f(xPlotLeft,  yPlotTop/2.0f);
+		gl.glEnd();
+		*/
 		// determine which slices are needed
 		int lastSliceIndex  = (int) Math.floor((double) (sampleCount - 1) / (double) domain * Math.floor(plotWidth) / (double) sliceWidth);
 		int firstSliceIndex = lastSliceIndex - (int) Math.ceil(plotWidth / sliceWidth);
@@ -267,7 +291,7 @@ public class OpenGLTimeDomainChartCached extends PositionedChart {
 		
 		// update textures if needed, and draw the slices
 		for(int i = firstSliceIndex; i <= lastSliceIndex; i++) {		
-			slices[i % slices.length].updateSliceTexture(i, sliceWidth, (int) plotHeight, (int) plotWidth, domain, plotMinY, plotMaxY, sampleCount, datasets, xDivisions.keySet(), yDivisions.keySet(), gl);
+			slices[i % slices.length].updateSliceTexture(i, sliceWidth, (int) plotHeight, (int) plotWidth, domain, plotMinY, plotMaxY, sampleCount, datasets, xDivisions.keySet(), yDivisions.keySet(), gl, levelOne, levelTwo, levelThree);
 			int x = (int) (xPlotRight + (i * sliceWidth) - ((double) (sampleCount - 1) / (double) domain * (int) plotWidth));
 			int y = (int) yPlotBottom;
 			slices[i % slices.length].renderSliceAt(x, y, gl);
@@ -390,4 +414,17 @@ public class OpenGLTimeDomainChartCached extends PositionedChart {
 		
 	}
 
+	/**
+	 * This function sets the level threshold values for a graph.
+	 * Currently takes values between 0 and 1. TODO change this  
+	 * @param levelOne
+	 * @param levelTwo
+	 * @param levelThree
+	 */
+	private void setThresholds(float levelOne, float levelTwo, float levelThree) {
+		this.levelOne = levelOne; 
+		this.levelTwo = levelTwo; 
+		this.levelThree = levelThree; 
+	}
+	
 }

@@ -31,7 +31,7 @@ public abstract class PositionedChart extends JPanel {
 		datasets = chartInputs;
 		
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
-			
+		
 	}
 	
 	public boolean regionOccupied(int startX, int startY, int endX, int endY) {
