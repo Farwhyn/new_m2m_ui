@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 
 import ch.makery.address.MainApp;
+import ch.makery.address.graphs.Main;
 import ch.makery.address.model.Patient;
 import ch.makery.address.model.Session;
 import ch.makery.address.util.SQLiteSync;
@@ -31,7 +32,9 @@ public class SessionsForPersonController {
     @FXML
     private TableColumn<Session, String> sessionDateColumn;
 
-    
+	//Main Graph 
+	private static Main maing;
+	
     //Reference to the main application.
     private MainApp mainApp;
     private SQLiteSync db;
@@ -149,5 +152,16 @@ public class SessionsForPersonController {
     		e.printStackTrace();
     	}
     }
+    
+    @FXML
+	void handleNewSessionOpen() {
+		 if(maing != null) {
+		        maing.show(); //no function to show()??
+		    }
+		    else{
+		        maing = new Main();
+		        maing.show();
+		    }
+	}
 	
 }

@@ -1,6 +1,7 @@
 package ch.makery.address.view;
 
 import javafx.collections.FXCollections;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -27,11 +29,14 @@ import java.util.List;
 import java.util.Locale;
 
 import ch.makery.address.MainApp;
+import ch.makery.address.graphs.Main;
 import ch.makery.address.model.Patient;
 import ch.makery.address.model.Person;
 import ch.makery.address.model.Session;
 import ch.makery.address.util.DateUtil;
 import ch.makery.address.util.SQLiteSync;
+//import graph.MainGraph;
+//import m2mgraphs.main;
 
 public class PersonOverviewController {
 	@FXML
@@ -63,7 +68,7 @@ public class PersonOverviewController {
 
 	@FXML
 	private TabPane tabPane;
-
+	
 	private int numTabs = 0;
 
 	private ObservableList<String> monthNames = FXCollections.observableArrayList();
@@ -75,6 +80,8 @@ public class PersonOverviewController {
 	private MainApp mainApp;
 	private SQLiteSync db;
 
+	//Main Graph 
+	private static Main maing;
 	/**
 	 * The constructor. The constructor is called before the initialize()
 	 * method.
@@ -325,4 +332,5 @@ public class PersonOverviewController {
 		}
 
 	}
+	
 }

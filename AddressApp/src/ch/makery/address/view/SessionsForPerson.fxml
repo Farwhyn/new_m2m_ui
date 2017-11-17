@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.SessionsForPersonController">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.SessionsForPersonController">
    <children>
       <SplitPane dividerPositions="0.5" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -67,9 +67,9 @@
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="314.0" prefWidth="593.0">
                            <children>
-                              <ButtonBar layoutX="285.0" layoutY="204.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                              <ButtonBar layoutX="285.0" layoutY="204.0" prefHeight="25.0" prefWidth="310.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
                                 <buttons>
-                                  <Button mnemonicParsing="false" text="New Session" />
+                                  <Button fx:id="newSessionButton" mnemonicParsing="false" onAction="#handleNewSessionOpen" text="New Session" />
                                     <Button mnemonicParsing="false" text="Button" />
                                     <Button mnemonicParsing="false" text="Button" />
                                 </buttons>

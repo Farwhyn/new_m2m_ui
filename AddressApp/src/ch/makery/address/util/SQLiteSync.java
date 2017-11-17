@@ -159,10 +159,12 @@ public class SQLiteSync {
 	private void getConnection() throws ClassNotFoundException, SQLException {
 
 		Class.forName("org.sqlite.JDBC"); // find the sqlite JDBC driver
-		con = DriverManager.getConnection("jdbc:sqlite:Resources/Database/m2m.db"); // connect
+		//Eclipse path
+		//con = DriverManager.getConnection("jdbc:sqlite:Resources/Database/m2m.db"); // connect
 																					// to
 																					// the
 																					// database
+		con = DriverManager.getConnection("jdbc:sqlite:Database/m2m.db");
 		initialise();
 	}
 
