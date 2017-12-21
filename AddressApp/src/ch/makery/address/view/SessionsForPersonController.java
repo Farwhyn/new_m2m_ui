@@ -156,7 +156,7 @@ public class SessionsForPersonController {
     @FXML
 	void handleNewSessionOpen() {
 		 if(maing != null) {
-		        maing.show(); //no function to show()??
+		        maing.show(); 
 		    }
 		    else{
 		        maing = new Main();

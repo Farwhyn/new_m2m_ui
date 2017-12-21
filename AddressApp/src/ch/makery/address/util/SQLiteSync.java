@@ -20,6 +20,7 @@ public class SQLiteSync {
 	private static final String PATIENTS_TBL = "patients";
 	private static final String SESSIONS_TBL = "sessions";
 	private static final String SESSION_DATA_TBL = "sessionData";
+	private static final String THERAPISTS_TBL = "therapists";
 
 	public ResultSet displayUsers() throws ClassNotFoundException, SQLException {
 		if (con == null) {
@@ -160,11 +161,12 @@ public class SQLiteSync {
 
 		Class.forName("org.sqlite.JDBC"); // find the sqlite JDBC driver
 		//Eclipse path
-		//con = DriverManager.getConnection("jdbc:sqlite:Resources/Database/m2m.db"); // connect
+		con = DriverManager.getConnection("jdbc:sqlite:Resources/Database/m2m.db"); // connect
 																					// to
 																					// the
 																					// database
-		con = DriverManager.getConnection("jdbc:sqlite:Database/m2m.db");
+		//Jar file path
+		//con = DriverManager.getConnection("jdbc:sqlite:Database/m2m.db");
 		initialise();
 	}
 
@@ -176,34 +178,7 @@ public class SQLiteSync {
 
 		Statement state = con.createStatement();
 		ResultSet res = state.executeQuery("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'patients'");
-		/*
-		 * if(!res.next()) {
-		 * System.out.println("Initializing the patient table");
-		 * 
-		 * //build the table Statement state2 = con.createStatement();
-		 * state2.execute("CREATE TABLE user(id integer," + "fName varchar(60),"
-		 * + "lName varchar(60)," + "sName varchar(60)," + "primary key(id));");
-		 * 
-		 * //insert some sample data PreparedStatement prep =
-		 * con.prepareStatement("INSERT INTO user values(?, ?, ?, ?)");
-		 * prep.setString(2, "James"); prep.setString(3, "Zhou");
-		 * prep.setString(4, "August 11, 2016"); prep.execute();
-		 * 
-		 * 
-		 * PreparedStatement prep2 =
-		 * con.prepareStatement("INSERT INTO user values(?, ?, ?, ?)");
-		 * prep2.setString(2, "Andrew"); prep2.setString(3, "Yan");
-		 * prep2.setString(4, "September 8, 2016"); prep2.execute();
-		 * 
-		 * PreparedStatement prep3 =
-		 * con.prepareStatement("INSERT INTO user values(?, ?, ?, ?)");
-		 * prep3.setString(2, "May"); prep3.setString(3, "Liang");
-		 * prep3.setString(4, "October 6, 2016"); prep3.execute();
-		 * 
-		 * }
-		 * 
-		 * 
-		 */
+	
 	}
 
 	public void addPatient(Patient patient) throws ClassNotFoundException, SQLException {
@@ -211,14 +186,14 @@ public class SQLiteSync {
 			getConnection();
 		}
 
-		PreparedStatement prep = con.prepareStatement("INSERT INTO patients values(?, ?, ?, ?, ?, ?, ?)");
-		prep.setString(2, patient.getFirstName());
-		prep.setString(3, patient.getLastName());
-		prep.setString(4, patient.getStreet());
-		prep.setString(5, patient.getCity());
-		prep.setString(6, patient.getCardCode());
-		prep.setString(7, patient.getVisitDate());
-		prep.execute();
+		PreparedStatement ps = con.prepareStatement("INSERT INTO patients values(?, ?, ?, ?, ?, ?, ?)");
+		ps.setString(2, patient.getFirstName());
+		ps.setString(3, patient.getLastName());
+		ps.setString(4, patient.getStreet());
+		ps.setString(5, patient.getCity());
+		ps.setString(6, patient.getCardCode());
+		ps.setString(7, patient.getVisitDate());
+		ps.execute();
 	}
 
 	public void deletePatient(String patient_id) throws ClassNotFoundException, SQLException {
@@ -226,8 +201,32 @@ public class SQLiteSync {
 			getConnection();
 		}
 
-		PreparedStatement prep = con.prepareStatement("DELETE FROM patients WHERE patientID = ?");
-		prep.setString(1, patient_id);
-		prep.execute();
+		PreparedStatement ps = con.prepareStatement("DELETE FROM patients WHERE patientID = ?");
+		ps.setString(1, patient_id);
+		ps.execute();
+	}
+	
+	public boolean login(String username, String password) throws ClassNotFoundException, SQLException {
+		if (con == null) {
+			getConnection();
+		}
+
+		PreparedStatement ps = con.prepareStatement("SELECT * FROM " + THERAPISTS_TBL + " WHERE username = ? AND password = ?");
+		ps.setString(1, username);
+		ps.setString(2, password);
+		ResultSet rs = ps.executeQuery();
+		boolean success = rs.next(); 
+		
+		return success; 
+		
+		
+	}
+	
+	/**
+	 * Creates a new user in the therapists table
+	 * TODO 
+	 **/
+	public boolean create_user() {
+		return true;
 	}
 }

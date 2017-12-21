@@ -29,6 +29,7 @@ import ch.makery.address.view.PersonEditDialogController;
 import ch.makery.address.view.PersonOverviewController;
 import ch.makery.address.view.RootLayoutController;
 import ch.makery.address.view.sessionInfoController;
+import ch.makery.address.view.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -78,9 +79,9 @@ public class MainApp extends Application {
         this.primaryStage.setTitle("Music to Movement");
         this.primaryStage.getIcons().add(new Image("file:Resources/Images/light_logo.png"));
         initRootLayout();
+        showLogin();
+        //showPersonOverview();
         
-       showPersonOverview();
-    //   showSessionInfo();
     }
 
     /**
@@ -119,7 +120,30 @@ public class MainApp extends Application {
     }
 
     /**
-     * Shows the person overview inside the root layout.
+     * Shows login page 
+     */
+    public void showLogin() {
+        try {
+            // Load login .
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/LoginPage.fxml"));
+            AnchorPane login = (AnchorPane) loader.load();
+
+            // Set login page into the center of root layout.
+            rootLayout.setCenter(login);
+
+            // Give the controller access to the main app.
+            LoginController controller = loader.getController();
+            controller.setMainApp(this);
+
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    /**
+     * Shows list of patients and graph of no. of patients on the side. 
+     * TODO change name to patients overview
      */
     public void showPersonOverview() {
         try {
@@ -132,8 +156,8 @@ public class MainApp extends Application {
             rootLayout.setCenter(personOverview);
 
             // Give the controller access to the main app.
-            PersonOverviewController controller = loader.getController();
-            controller.setMainApp(this);
+            //PersonOverviewController controller = loader.getController();
+            //controller.setMainApp(this);
 
         } catch (IOException e) {
             e.printStackTrace();
