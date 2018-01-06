@@ -3,8 +3,12 @@ package ch.makery.address.view;
 import javafx.collections.FXCollections;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
@@ -56,8 +60,6 @@ public class LoginController {
 	
 	//FXML elements
 	@FXML
-	private ImageView logoimg; 
-	@FXML
 	private TextField username; 
 	@FXML
 	private PasswordField password; 
@@ -73,18 +75,13 @@ public class LoginController {
 
 	}
 
-	@FXML
-	private void initialize() {
-		
-		Image logo = new Image("file:Resources/Images/light_logo.png");
-		logoimg.setImage(logo);
-	}
+	
 
 	/**
 	 * Tries to log in user with the entered credentials. 
 	 */
 	@FXML
-	private void handleLoginRequest(){
+	private void handleLoginRequest(ActionEvent event){
 		String usernameEntered = username.getText(); 
 		String passwordEntered = password.getText(); 
 		boolean success = false; 
@@ -99,7 +96,7 @@ public class LoginController {
 		} 
 		
 		if(success){
-			showPersonOverview(); 
+			showPersonOverview(event); 
 		}
 		else {
 			//something
@@ -110,12 +107,22 @@ public class LoginController {
      * Shows list of patients and graph of no. of patients on the side. 
      * TODO change name to patients overview
      */
-    public void showPersonOverview() {
+    public void showPersonOverview(ActionEvent event) {
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/PersonOverview.fxml"));
-            anchorpane = (AnchorPane) loader.load();
+          //  anchorpane = (AnchorPane) loader.load();
+            
+            
+            
+            Parent personOverview = loader.load(); 
+            Scene personOverviewScene = new Scene(personOverview); 
+            
+            //This gets the stage information 
+            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow(); 
+            window.setScene(personOverviewScene);
+            window.show(); 
            // anchorpane.getChildren().setAll(loader.load());
 
             // Set person overview into the center of root layout.

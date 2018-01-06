@@ -4,12 +4,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.LoginController">
+<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-image: url('file:/D:/EST/new_m2m_ui/AddressApp/Resources/Images/light_logo.png');" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.LoginController">
    <children>
+      <ImageView fitHeight="1251.0" fitWidth="1443.0" layoutX="-25.0" layoutY="-275.0" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Resources/Images/light_logo.png" />
+         </image>
+      </ImageView>
       <HBox layoutX="532.0" layoutY="367.0" prefHeight="25.0" prefWidth="200.0">
          <children>
             <Label prefHeight="44.0" prefWidth="114.0" text="Username" />
@@ -22,7 +28,6 @@
             <PasswordField fx:id="password" />
          </children>
       </HBox>
-      <ImageView fx:id="logoimg" fitHeight="150.0" fitWidth="200.0" layoutX="532.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="loginButton" layoutX="680.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleLoginRequest" text="Login" />
+      <Button fx:id="loginButton" layoutX="686.0" layoutY="455.0" mnemonicParsing="false" onAction="#handleLoginRequest" text="Login" />
    </children>
 </AnchorPane>
