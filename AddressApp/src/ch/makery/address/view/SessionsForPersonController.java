@@ -55,12 +55,6 @@ public class SessionsForPersonController {
     	//Initialize the Sessions Column
     	sessionIDColumn.setCellValueFactory(cellData -> cellData.getValue().sessionIDProperty());
         sessionDateColumn.setCellValueFactory(cellData -> cellData.getValue().sessionDateProperty());
-   
-     /*   sessionsTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-
-			showSessionInfo(newValue);
-
-		});*/
         
     	sessionsTable.setRowFactory( tv -> {
 			TableRow<Session> row = new TableRow<>(); 

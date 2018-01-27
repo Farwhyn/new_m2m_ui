@@ -46,8 +46,7 @@ import ch.makery.address.model.Person;
 import ch.makery.address.model.Session;
 import ch.makery.address.util.DateUtil;
 import ch.makery.address.util.SQLiteSync;
-//import graph.MainGraph;
-//import m2mgraphs.main;
+
 
 public class LoginController {
 
@@ -67,6 +66,7 @@ public class LoginController {
 	private Button loginButton;
 	@FXML
 	private AnchorPane anchorpane; 
+	
 	/**
 	 * The constructor. The constructor is called before the initialize()
 	 * method.
@@ -75,23 +75,22 @@ public class LoginController {
 
 	}
 
-	
 
 	/**
 	 * Tries to log in user with the entered credentials. 
 	 */
 	@FXML
 	private void handleLoginRequest(ActionEvent event){
+		
 		String usernameEntered = username.getText(); 
 		String passwordEntered = password.getText(); 
 		boolean success = false; 
+		
 		try {
 			success = db.login(usernameEntered, passwordEntered);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		
@@ -99,7 +98,8 @@ public class LoginController {
 			showPersonOverview(event); 
 		}
 		else {
-			//something
+			//print out an error message
+			//password recovery mechanism 
 		}
 	}
 	
@@ -112,9 +112,6 @@ public class LoginController {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/PersonOverview.fxml"));
-          //  anchorpane = (AnchorPane) loader.load();
-            
-            
             
             Parent personOverview = loader.load(); 
             Scene personOverviewScene = new Scene(personOverview); 
@@ -123,11 +120,7 @@ public class LoginController {
             Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow(); 
             window.setScene(personOverviewScene);
             window.show(); 
-           // anchorpane.getChildren().setAll(loader.load());
-
-            // Set person overview into the center of root layout.
-            //rootLayout.setCenter(personOverview);
-
+       
             // Give the controller access to the main app.
             PersonOverviewController controller = loader.getController();
             controller.setMainApp(this.mainApp);
@@ -139,7 +132,6 @@ public class LoginController {
     
 	/**
 	 * Is called by the main application to give a reference back to itself.
-	 * 
 	 * @param mainApp
 	 */
 	public void setMainApp(MainApp mainApp) {

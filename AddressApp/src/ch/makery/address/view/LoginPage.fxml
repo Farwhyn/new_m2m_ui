@@ -4,30 +4,21 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-image: url('file:/D:/EST/new_m2m_ui/AddressApp/Resources/Images/light_logo.png');" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.LoginController">
+<AnchorPane fx:id="anchorpane" prefHeight="600.0" prefWidth="900.0" styleClass="background-login" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.LoginController">
    <children>
-      <ImageView fitHeight="1251.0" fitWidth="1443.0" layoutX="-25.0" layoutY="-275.0" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../Resources/Images/light_logo.png" />
-         </image>
-      </ImageView>
-      <HBox layoutX="532.0" layoutY="367.0" prefHeight="25.0" prefWidth="200.0">
+      <HBox layoutX="532.0" layoutY="367.0">
          <children>
-            <Label prefHeight="44.0" prefWidth="114.0" text="Username" />
-            <TextField fx:id="username" />
-         </children>
-      </HBox>
-      <HBox layoutX="532.0" layoutY="403.0" prefHeight="25.0" prefWidth="200.0">
+            <Label prefHeight="37.0" prefWidth="136.0" stylesheets="@loginTheme.css" text="Username" />
+            <TextField fx:id="username" prefHeight="37.0" prefWidth="178.0" />
+         </children></HBox>
+      <HBox layoutX="532.0" layoutY="414.0">
          <children>
-            <Label prefHeight="44.0" prefWidth="114.0" text="Password" />
-            <PasswordField fx:id="password" />
-         </children>
-      </HBox>
-      <Button fx:id="loginButton" layoutX="686.0" layoutY="455.0" mnemonicParsing="false" onAction="#handleLoginRequest" text="Login" />
+            <Label prefHeight="38.0" prefWidth="138.0" text="Password" />
+            <PasswordField fx:id="password" prefHeight="37.0" prefWidth="177.0" />
+         </children></HBox>
+      <Button fx:id="loginButton" layoutX="762.0" layoutY="485.0" mnemonicParsing="false" onAction="#handleLoginRequest" stylesheets="@loginTheme.css" text="Login" />
    </children>
 </AnchorPane>

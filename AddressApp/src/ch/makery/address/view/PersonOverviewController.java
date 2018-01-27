@@ -46,20 +46,6 @@ public class PersonOverviewController {
 	@FXML
 	private TableColumn<Patient, String> lastNameColumn;
 
-	/*
-	 * @FXML private Label firstNameLabel;
-	 * 
-	 * @FXML private Label lastNameLabel;
-	 * 
-	 * @FXML private Label streetLabel;
-	 * 
-	 * @FXML private Label careCardLabel;
-	 * 
-	 * @FXML private Label cityLabel;
-	 * 
-	 * @FXML private Label visitDateLabel;
-	 */
-
 	@FXML
 	private BarChart<String, Integer> barChart;
 
@@ -90,29 +76,6 @@ public class PersonOverviewController {
 
 	}
 
-	/**
-	 * Fills all text fields to show details about the person. If the specified
-	 * person is null, all text fields are cleared.
-	 * 
-	 * @param person
-	 *            the person or null
-	 */
-	/*
-	 * private void showPersonDetails(Patient patient) { if (patient != null) {
-	 * // Fill the labels with info from the person object.
-	 * firstNameLabel.setText(patient.getFirstName());
-	 * lastNameLabel.setText(patient.getLastName());
-	 * streetLabel.setText(patient.getStreet());
-	 * careCardLabel.setText(patient.getCardCode());
-	 * cityLabel.setText(patient.getCity());
-	 * 
-	 * visitDateLabel.setText(patient.getVisitDate()); } else { // Person is
-	 * null, remove all the text. firstNameLabel.setText("");
-	 * lastNameLabel.setText(""); streetLabel.setText("");
-	 * careCardLabel.setText(""); cityLabel.setText("");
-	 * visitDateLabel.setText(""); } }
-	 */
-
 	@FXML
 	private void initialize() {
 		// Initialize the person table with the two columns.
@@ -138,12 +101,6 @@ public class PersonOverviewController {
 
 		barChart.setLegendVisible(false);
 
-/*		personTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-
-			handleNewListSessionsTab(newValue);
-
-		});
-*/
 		personTable.setRowFactory( tv -> {
 			TableRow<Patient> row = new TableRow<>(); 
 			row.setOnMouseClicked(event -> {
@@ -154,9 +111,6 @@ public class PersonOverviewController {
 			});
 			return row; 
 		});
-		// showPersonDetails(newValue));
-		// handleNewListSessionsTab(null));
-		// mainApp.showSessionInfo());
 
 	}
 
