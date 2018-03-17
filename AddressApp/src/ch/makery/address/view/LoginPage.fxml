@@ -4,21 +4,49 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorpane" prefHeight="600.0" prefWidth="900.0" styleClass="background-login" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.LoginController">
+<AnchorPane fx:id="anchorpane" prefHeight="600.0" prefWidth="900.0" styleClass="background-login" stylesheets="@loginTheme.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.LoginController">
    <children>
-      <HBox layoutX="532.0" layoutY="367.0">
+      <HBox layoutX="552.0" layoutY="206.0">
          <children>
-            <Label prefHeight="37.0" prefWidth="136.0" stylesheets="@loginTheme.css" text="Username" />
-            <TextField fx:id="username" prefHeight="37.0" prefWidth="178.0" />
+            <TextField fx:id="username" prefHeight="37.0" prefWidth="309.0" />
          </children></HBox>
-      <HBox layoutX="532.0" layoutY="414.0">
-         <children>
-            <Label prefHeight="38.0" prefWidth="138.0" text="Password" />
-            <PasswordField fx:id="password" prefHeight="37.0" prefWidth="177.0" />
-         </children></HBox>
-      <Button fx:id="loginButton" layoutX="762.0" layoutY="485.0" mnemonicParsing="false" onAction="#handleLoginRequest" stylesheets="@loginTheme.css" text="Login" />
+      <HBox layoutX="532.0" layoutY="414.0" />
+      <Button fx:id="loginButton" layoutX="774.0" layoutY="353.0" mnemonicParsing="false" onAction="#handleLoginRequest" style="-fx-border-radius: 15 15 15 15; -fx-background-radius: 15 15 15 15; -fx-background-color: #2C3B8D; -fx-text-fill: white; -fx-border-color: #2C3B8D;" stylesheets="@loginTheme.css" text="Login" textFill="WHITE" textOverrun="CLIP" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2c3b8d" height="600.0" stroke="BLACK" strokeType="INSIDE" width="483.0" />
+      <Text id="hello-header" fill="WHITE" layoutX="91.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello There.">
+         <font>
+            <Font size="44.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="69.0" fitWidth="48.0" layoutX="91.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Resources/Images/light_logo.png" />
+         </image>
+         <effect>
+            <Blend />
+         </effect>
+      </ImageView>
+      <Text fill="WHITE" layoutX="91.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Sign in to Get Started">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="91.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Music 2 Movement">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Label layoutX="552.0" layoutY="169.0" prefHeight="37.0" prefWidth="136.0" stylesheets="@loginTheme.css" text="Username" />
+      <PasswordField fx:id="password" layoutX="552.0" layoutY="297.0" prefHeight="37.0" prefWidth="309.0" />
+      <Label layoutX="552.0" layoutY="260.0" prefHeight="38.0" prefWidth="138.0" text="Password" />
    </children>
 </AnchorPane>
