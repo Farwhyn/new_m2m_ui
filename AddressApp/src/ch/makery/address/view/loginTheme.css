@@ -1,5 +1,5 @@
 .background-login {
-    -fx-background-image: url('file:/D:/BEST/new_m2m_ui/AddressApp/Resources/Images/light_logo.png');	
+    -fx-background-image: url('file:Resources/Images/light_logo.png');	
     -fx-background-repeat: stretch;   
     -fx-background-size: 100% 100%;
     -fx-background-position: center center;
